@@ -35,13 +35,13 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
 
 	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
-	Mesh1P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh1P"));
+	/*Mesh1P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh1P"));
 	Mesh1P->SetOnlyOwnerSee(true);
 	Mesh1P->SetupAttachment(FirstPersonCameraComponent);
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 	Mesh1P->RelativeRotation = FRotator(1.9f, -19.19f, 5.2f);
-	Mesh1P->RelativeLocation = FVector(-0.5f, -4.4f, -155.7f);
+	Mesh1P->RelativeLocation = FVector(-0.5f, -4.4f, -155.7f);*/
 
 	// Create a gun mesh component
 	FP_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FP_Gun"));
@@ -85,7 +85,7 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 
 	// Uncomment the following line to turn motion controllers on by default:
 	//bUsingMotionControllers = true;
-	DC_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("DC_Gun"));
+	/*DC_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("DC_Gun"));
 	DC_Gun->SetupAttachment(RootComponent);
 	
 	FORCE_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("FORCE_Gun"));
@@ -101,7 +101,7 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 	RAIL_Gun->SetupAttachment(RootComponent);
 
 	STUN_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("STUN_Gun"));
-	STUN_Gun->SetupAttachment(RootComponent);
+	STUN_Gun->SetupAttachment(RootComponent);*/
 	
 	
 }
@@ -113,37 +113,27 @@ void ASpaceHorrorCharacter::BeginPlay()
 	
 	
 	//Attach Gun to Player BP
-	DC_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	/*DC_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	FORCE_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	GR_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	LASER_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	RAIL_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-	STUN_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	STUN_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));*/
 
 	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
-	FP_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	//FP_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	
 	// Show or hide the two versions of the gun based on whether or not we're using motion controllers.
 	if (bUsingMotionControllers)
 	{
 		VR_Gun->SetHiddenInGame(false, true);
-		Mesh1P->SetHiddenInGame(true, true);
+		//Mesh1P->SetHiddenInGame(true, true);
 	}
 	else
 	{
 		VR_Gun->SetHiddenInGame(true, true);
-		Mesh1P->SetHiddenInGame(false, true);
+		//Mesh1P->SetHiddenInGame(false, true);
 	}
-
-	DC_Gun->SetHiddenInGame(false, true);
-	FORCE_Gun->SetHiddenInGame(false, true);
-	GR_Gun->SetHiddenInGame(false, true);
-	LASER_Gun->SetHiddenInGame(false, true);
-	RAIL_Gun->SetHiddenInGame(false, true);
-	STUN_Gun->SetHiddenInGame(false, true);
-
-	//Default select weapon
-	Weapon2();
 
 	
 }
@@ -167,12 +157,12 @@ void ASpaceHorrorCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	}
 
 	//Weapon Selecter TODO MAKE TO ENUM
-	PlayerInputComponent->BindAction("Weapon 1", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon1);
+	/*PlayerInputComponent->BindAction("Weapon 1", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon1);
 	PlayerInputComponent->BindAction("Weapon 2", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon2);
 	PlayerInputComponent->BindAction("Weapon 3", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon3);
 	PlayerInputComponent->BindAction("Weapon 4", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon4);
 	PlayerInputComponent->BindAction("Weapon 5", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon5);
-	PlayerInputComponent->BindAction("Weapon 6", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon6);
+	PlayerInputComponent->BindAction("Weapon 6", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon6);*/
 
 	//Reload Action
 	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ASpaceHorrorCharacter::Reload);
@@ -224,7 +214,7 @@ void ASpaceHorrorCharacter::InputFireUp() {
 	IsFireInputUp = true;
 }
 
-void ASpaceHorrorCharacter::Weapon1()
+/*void ASpaceHorrorCharacter::Weapon1()
 {
 	if (WeaponSelecter != 0)
 	{
@@ -326,7 +316,7 @@ void ASpaceHorrorCharacter::Weapon6()
 		RAIL_Gun->SetHiddenInGame(true, true);
 		DC_Gun->SetHiddenInGame(true, true);
 	}
-}
+}*/
 
 void ASpaceHorrorCharacter::OnResetVR()
 {

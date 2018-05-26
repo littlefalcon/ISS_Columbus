@@ -13,7 +13,6 @@ class ASpaceHorrorCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-	
 	/** Gun mesh: 1st person view (seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	class USkeletalMeshComponent* FP_Gun;
@@ -44,8 +43,8 @@ class ASpaceHorrorCharacter : public ACharacter
 	
 public:
 	ASpaceHorrorCharacter();
-
-	/** Pawn mesh: 1st person view (arms; seen only by self) */
+	/* Pawn mesh: 1st person view (arms; seen only by self) */
+	/*
 	UPROPERTY(BlueprintReadWrite, Category = Mesh)
 		class USkeletalMeshComponent* Mesh1P;
 
@@ -66,6 +65,7 @@ public:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Weapon)
 		class UChildActorComponent* STUN_Gun = nullptr;
+	*/
 
 protected:
 	virtual void BeginPlay();
@@ -165,7 +165,7 @@ protected:
 
 public:
 	/** Returns Mesh1P subobject **/
-	FORCEINLINE class USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
+	//FORCEINLINE class USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
@@ -187,12 +187,12 @@ private:
 	
 	float CooldownTime = 0;
 	virtual void Tick(float DeltaTime) override;
-	void Weapon1();
+	/*void Weapon1();
 	void Weapon2();
 	void Weapon3();
 	void Weapon4();
 	void Weapon5();
-	void Weapon6();
+	void Weapon6();*/
 	
 
 
